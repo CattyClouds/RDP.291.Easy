@@ -16,10 +16,8 @@ namespace RDP._291.Easy
 
 		static void Main(string[] args)
 		{
-			var availSpots = new List<int>();
-
 			// Weight, Temp
-			var tableSpotFormal = new TupleList<int, int>
+			var tableFormal = new TupleList<int, int>
 			{
 				{ 100, 80 }, // Goldilocks
 				{ 30, 50 }, { 130, 75 },{ 90, 60 },
@@ -27,7 +25,7 @@ namespace RDP._291.Easy
 			};
 
 			// Weight, Temp
-			var tableSpotChallenge = new TupleList<int, int>
+			var tableChallenge = new TupleList<int, int>
 			{
 				{ 100, 120 }, // Goldilocks
 				{ 297, 90 }, { 66, 110 }, { 257, 113 },{ 276, 191 },{ 280, 129 },
@@ -38,19 +36,21 @@ namespace RDP._291.Easy
 				{ 174, 52 }, { 16, 129 }, { 59, 181 }, { 290, 123 },{ 248, 132 }
 			};
 
-			for (int i = 1; i < tableSpotChallenge.Count; i++)
+			Console.WriteLine(String.Join(" ", CheckForSpots(tableChallenge)));
+		}
+
+		private static List<int> CheckForSpots(TupleList<int, int> table)
+		{
+			var availSpots = new List<int>();
+			for (int i = 1; i < table.Count; i++)
 			{
-				if ((tableSpotChallenge[0].Item1 <= tableSpotChallenge[i].Item1) && // Weight
-					(tableSpotChallenge[0].Item2 >= tableSpotChallenge[i].Item2))   // Temp
+				if ((table[0].Item1 <= table[i].Item1) && // Weight
+					(table[0].Item2 >= table[i].Item2))   // Temp
 				{
 					availSpots.Add(i);
 				}
 			}
-
-			Console.WriteLine(String.Join(" ", availSpots));
-
-			Console.WriteLine("-----------------------\nPress any key to exit...");
-			Console.ReadKey();
+			return availSpots;
 		}
 	}
 }
